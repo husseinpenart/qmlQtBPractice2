@@ -419,4 +419,126 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
+    RangeSlider{
+        anchors.centerIn: parent
+        from: 1
+        to: 100
+        first.value: 25
+        second.value: 75
+
+        first.onValueChanged: function(){
+            console.log("First value changed to " + Math.ceil(first.value))
+        }
+
+        second.onValueChanged: function(){
+            console.log("Second value changed to " + Math.ceil(second.value))
+        }
+    }
+
+    Flickable{
+        width: parent.width
+        height: parent.height
+        contentHeight: mColumnId.implicitHeight
+
+        Column{
+            id: mColumnId
+            anchors.fill: parent
+
+            Rectangle{
+                color: "red"
+                width: parent.width
+                height: 200
+                Text{
+                    anchors.centerIn: parent
+                    text: "Element1"
+                    font.pointSize: 30
+                    color: "white"
+                }
+            }
+            Rectangle{
+                color: "lightgray"
+                width: parent.width
+                height: 200
+                Text{
+                    anchors.centerIn: parent
+                    text: "Element2"
+                    font.pointSize: 30
+                    color: "white"
+                }
+            }
+            Rectangle{
+                color: "gray"
+                width: parent.width
+                height: 200
+                Text{
+                    anchors.centerIn: parent
+                    text: "Element3"
+                    font.pointSize: 30
+                    color: "white"
+                }
+            }
+            Rectangle{
+                color: "yellowgreen"
+                width: parent.width
+                height: 200
+                Text{
+                    anchors.centerIn: parent
+                    text: "Element4"
+                    font.pointSize: 30
+                    color: "white"
+                }
+            }
+            Rectangle{
+                color: "dodgerblue"
+                width: parent.width
+                height: 200
+                Text{
+                    anchors.centerIn: parent
+                    text: "Element5"
+                    font.pointSize: 30
+                    color: "white"
+                }
+            }
+            Rectangle{
+                color: "green"
+                width: parent.width
+                height: 200
+                Text{
+                    anchors.centerIn: parent
+                    text: "Element6"
+                    font.pointSize: 30
+                    color: "white"
+                }
+            }
+        }
+
+        ScrollBar.vertical: ScrollBar{
+
+        }
+    }
+
+    Column{
+          width: parent.width
+          spacing: 20
+
+          Slider{
+              anchors.horizontalCenter: parent.horizontalCenter
+              width: parent.width
+              from: 1
+              to: 100
+              value: 40
+              onValueChanged: function(){
+                  progressBarId.value = value
+              }
+          }
+
+          ProgressBar{
+              id: progressBarId
+              anchors.horizontalCenter: parent.horizontalCenter
+              width: parent.width
+              from: 1
+              to: 100
+              value: 40
+          }
+      }
 }
