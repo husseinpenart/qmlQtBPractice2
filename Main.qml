@@ -7,76 +7,63 @@ Window {
     height: 480
     visible: true
     title: qsTr("qt beginner practice part 2")
-
     ColumnLayout{
-        anchors.left: parent.left
-        anchors.right: parent.right
         width: parent.width
-        Button{
-            id:button1
-            text:"click me"
+        spacing: 40
+
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
             Layout.fillWidth: true
-            onClicked: function(){
-                console.log("button1 clicked")
-            }
+            text: "Delayed Button. Use it when you want to prevent accidental clicks"
+            font.pointSize: 15
         }
 
+        DelayButton{
+            property bool activated: false
+            text: "DelayButton"
+            Layout.fillWidth: true
+            delay: 1000
 
+            onPressed: function(){
+                if(activated === true){
+                    console.log("Button is clicked. Carrying out the task")
+                    activated = false
+                }
+            }
+
+            onActivated: function(){
+                console.log("Button actiaved")
+                activated = true
+            }
+
+            onProgressChanged: function(){
+                console.log(progress)
+            }
+        }
     }
-    ColumnLayout{
+    Column{
         width: parent.width
-        BusyIndicator{
-            id:indicatorId
-            visible: true
-            running: true
-            Layout.alignment: Qt.AlignHCenter
+        spacing: 40
 
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "A Knob used to let the user choose a value from a range"
+            font.pointSize: 15
         }
-        Button{
-            id:runId
-            text:"runIndicator"
-            Layout.fillWidth: true
-            onClicked: function(){
-                indicatorId.running = true
-                indicatorId.visible = true
+
+        Dial{
+            anchors.horizontalCenter: parent.horizontalCenter
+            from: 1
+            to: 100
+            value: 50
+            //wrap: true // Read the docs to figure out if you really want this for your project!
+
+            onValueChanged: function(){
+                console.log("Current value: " + Math.ceil(value))
             }
         }
-        Button{
-            id:stopId
-            text:"stop Indicator"
-            Layout.fillWidth: true
-            onClicked: function(){
-                indicatorId.running = false
-                indicatorId.visible = false
-            }
-        }
-
-        Column{
-               spacing: 20
-               anchors.horizontalCenter: parent.horizontalCenter
-
-               CheckBox{
-                   text: "Option1"
-                   checked: true
-                   onCheckedChanged: function(){
-                       if(checked){
-                           console.log("Option1 is checked")
-                       }else{
-                           console.log("Option1 is unchecked")
-                       }
-                   }
-               }
-
-               CheckBox{
-                   text: "Option2"
-               }
-
-               CheckBox{
-                   text: "Option3"
-                   checked: true
-                   enabled: false
-               }
-           }
-
     }
 }
