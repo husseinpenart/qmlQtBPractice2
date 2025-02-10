@@ -4,7 +4,7 @@ project(qtQmlPracticeBeginnerp2 VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Qt6 REQUIRED COMPONENTS Quick QuickControls2)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -22,6 +22,12 @@ qt_add_qml_module(appqtQmlPracticeBeginnerp2
         QML_FILES TextEdit.qml
         QML_FILES mouseArea.qml
         QML_FILES KeyPress.qml
+        QML_FILES keyPositions.qml
+        QML_FILES anchorsPositions.qml
+        QML_FILES margins.qml
+        QML_FILES siblings.qml
+        QML_FILES layout.qml
+        QML_FILES flows.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -36,7 +42,8 @@ set_target_properties(appqtQmlPracticeBeginnerp2 PROPERTIES
 )
 
 target_link_libraries(appqtQmlPracticeBeginnerp2
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt6::QuickControls2
+
 )
 
 include(GNUInstallDirs)
