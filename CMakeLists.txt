@@ -29,6 +29,11 @@ qt_add_qml_module(appqtQmlPracticeBeginnerp2
         QML_FILES layout.qml
         QML_FILES flows.qml
         QML_FILES QtControllers.qml
+        RESOURCES
+           images/image1.jpg
+           images/image2.jpg
+           images/image3.jpg
+        RESOURCE_PREFIX /
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

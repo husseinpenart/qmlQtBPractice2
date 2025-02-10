@@ -49,31 +49,31 @@ Item {
         }
 
         Column{
-               spacing: 20
-               anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 20
+            anchors.horizontalCenter: parent.horizontalCenter
 
-               CheckBox{
-                   text: "Option1"
-                   checked: true
-                   onCheckedChanged: function(){
-                       if(checked){
-                           console.log("Option1 is checked")
-                       }else{
-                           console.log("Option1 is unchecked")
-                       }
-                   }
-               }
+            CheckBox{
+                text: "Option1"
+                checked: true
+                onCheckedChanged: function(){
+                    if(checked){
+                        console.log("Option1 is checked")
+                    }else{
+                        console.log("Option1 is unchecked")
+                    }
+                }
+            }
 
-               CheckBox{
-                   text: "Option2"
-               }
+            CheckBox{
+                text: "Option2"
+            }
 
-               CheckBox{
-                   text: "Option3"
-                   checked: true
-                   enabled: false
-               }
-           }
+            CheckBox{
+                text: "Option3"
+                checked: true
+                enabled: false
+            }
+        }
 
     }
 
@@ -231,4 +231,192 @@ Item {
         }
     }
 
+    Column{
+        spacing: 10
+        anchors.fill: parent
+
+        //RadioButton controls
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "A GroupBox wrapping around RadioButtons."
+        }
+
+        GroupBox{
+            title: "Choose bonus"
+            anchors.horizontalCenter: parent.horizontalCenter
+            Column{
+                RadioButton{
+                    text: "Coke"
+                    onCheckedChanged: function(){
+                        if(checked){
+                            console.log("Coke button checked")
+                        }else{
+                            console.log("Coke button NOT checked")
+                        }
+                    }
+                }
+
+                RadioButton{
+                    text: "Green Tea"
+                }
+
+                RadioButton{
+                    text: "Ice Cream"
+                }
+            }
+        }
+
+        //Checkbox controls
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "A GroupBox wrapping around CheckBoxes."
+        }
+
+        GroupBox{
+            title: "Choose a Qt supported desktop platoform"
+            anchors.horizontalCenter: parent.horizontalCenter
+            Column{
+                CheckBox{
+                    text: "Windows"
+                    onCheckedChanged: function(){
+                        if(checked){
+                            console.log("Windows button checked")
+                        }else{
+                            console.log("Windows button NOT checked")
+                        }
+                    }
+                }
+
+                CheckBox{
+                    text: "Mac"
+                }
+
+                CheckBox{
+                    text: "Linux"
+                }
+            }
+        }
+
+        // Disable and enable a groupbox
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "A Groupbox that can enabled and disabled"
+        }
+
+        GroupBox{
+            anchors.horizontalCenter: parent.horizontalCenter
+            label: CheckBox{
+                id: checkBox
+                checked: true
+                text: checked ? "Disable" : "Enable" // ternary operator
+                onCheckedChanged: function(){
+                    console.log("Status: " + text + "d")
+                }
+            }
+
+            Column{
+                enabled: checkBox.checked
+                CheckBox{
+                    text: "Item1"
+                }
+                CheckBox{
+                    text: "Item2"
+                }
+                CheckBox{
+                    text: "Item3"
+                }
+            }
+        }
+
+    }
+
+    SwipeView{
+        id: swipeViewId
+        anchors.fill: parent
+        currentIndex: pageIndicatorId.currentIndex
+        anchors.bottomMargin: 20
+
+        Image{
+            id: image1
+            fillMode: Image.PreserveAspectFit
+            source: "images/image1.jpg"
+        }
+        Image{
+            id: image2
+            fillMode: Image.PreserveAspectFit
+            source: "images/image2.jpg"
+        }
+        Image{
+            id: image3
+            fillMode: Image.PreserveAspectFit
+            source: "images/image3.jpg"
+        }
+
+        onCurrentIndexChanged: function(){
+            console.log("Current index: " + currentIndex)
+        }
+    }
+
+    PageIndicator{
+        id: pageIndicatorId
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        //PageIndicator specific properties
+        currentIndex: swipeViewId.currentIndex
+        interactive: true
+        count: swipeViewId.count
+    }
+    Column{
+        width: parent.width
+        spacing: 20
+
+        Button{
+            text: "Start"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: function(){
+                //Respond when the button is clicked.
+                progressBarId1.value = 75
+            }
+        }
+
+        Dial{
+            id: dialId
+            from: 1
+            to : 100
+            value: 40
+            anchors.horizontalCenter: parent.horizontalCenter
+            onValueChanged: function(){
+                //Transfer the value to some ProgressBar
+                progressBarId.value = value
+            }
+        }
+
+        ProgressBar{
+            id: progressBarId
+            from: 1
+            to: 100
+            value: 40
+            anchors.horizontalCenter: parent.horizontalCenter
+            onValueChanged: function(){
+                console.log("Current value: " + visualPosition)
+            }
+        }
+
+
+        ProgressBar{
+            id: progressBarId1
+            //value: 40
+            indeterminate: true
+            from: 1
+            to: 100
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
 }
