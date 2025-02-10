@@ -622,4 +622,40 @@ Item {
 
         }
     }
+
+    Column{
+        spacing: 40
+        width: parent.width
+
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "TextArea is a multi-line text editor."
+        }
+
+        ScrollView{
+            id: scrollViewId
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            height: 150
+            TextArea{
+                id: textAreaId
+                font.pointSize: 15
+                wrapMode: TextArea.WordWrap
+                placeholderText: "About Yourself"
+            }
+        }
+
+        Button{
+            text: "Submit"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: function(){
+                //console.log("The text is: " + textAreaId.text)
+                textAreaId.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan"
+            }
+        }
+
+
+    }
 }
