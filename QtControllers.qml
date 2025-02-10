@@ -518,27 +518,108 @@ Item {
     }
 
     Column{
-          width: parent.width
-          spacing: 20
+        width: parent.width
+        spacing: 20
 
-          Slider{
-              anchors.horizontalCenter: parent.horizontalCenter
-              width: parent.width
-              from: 1
-              to: 100
-              value: 40
-              onValueChanged: function(){
-                  progressBarId.value = value
-              }
-          }
+        Slider{
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            from: 1
+            to: 100
+            value: 40
+            onValueChanged: function(){
+                progressBarId.value = value
+            }
+        }
 
-          ProgressBar{
-              id: progressBarId
-              anchors.horizontalCenter: parent.horizontalCenter
-              width: parent.width
-              from: 1
-              to: 100
-              value: 40
-          }
-      }
+        ProgressBar{
+            id: progressBarId
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            from: 1
+            to: 100
+            value: 40
+        }
+    }
+
+    Column{
+        width: parent.width
+        spacing: 20
+
+        Switch{
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "WiFi"
+            checked: true
+            onCheckedChanged: function(){
+                if(checked){
+                    console.log("WiFi switch is turned ON")
+                }else{
+                    console.log("WiFi switch is turned OFF")
+                }
+            }
+        }
+
+        Switch{
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "Bluetooth"
+        }
+
+        Switch{
+            anchors.horizontalCenter: parent.horizontalCenter
+            enabled: false
+            text: "NFC"
+        }
+    }
+    Page{
+        id: pageId
+        anchors.fill: parent
+
+
+        header: Rectangle{
+            width: parent.width
+            height: 50
+            color: "yellowgreen"
+            Text{
+                text: "header Text"
+                anchors.centerIn: parent
+            }
+        }
+
+
+        SwipeView {
+            id: swipeViewId
+            anchors.fill: parent
+            currentIndex: tabBarId.currentIndex
+
+            Image {
+                fillMode: Image.PreserveAspectFit
+                source: "images/image1.jpg"
+            }
+
+            Image {
+                fillMode: Image.PreserveAspectFit
+                source: "images/image2.jpg"
+            }
+            Image {
+                fillMode: Image.PreserveAspectFit
+                source: "images/image3.jpg"
+            }
+        }
+
+        footer: TabBar{
+            id: tabBarId
+            currentIndex: swipeViewId.currentIndex
+
+            TabButton{
+                text: "First"
+            }
+            TabButton{
+                text: "Second"
+            }
+            TabButton{
+                text: "Third"
+            }
+
+        }
+    }
 }
