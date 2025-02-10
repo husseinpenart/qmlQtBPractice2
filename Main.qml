@@ -7,63 +7,109 @@ Window {
     height: 480
     visible: true
     title: qsTr("qt beginner practice part 2")
-    ColumnLayout{
-        width: parent.width
-        spacing: 40
 
-        Label {
-            width: parent.width
-            wrapMode: Label.Wrap
-            Layout.fillWidth: true
-            text: "Delayed Button. Use it when you want to prevent accidental clicks"
-            font.pointSize: 15
-        }
-
-        DelayButton{
-            property bool activated: false
-            text: "DelayButton"
-            Layout.fillWidth: true
-            delay: 1000
-
-            onPressed: function(){
-                if(activated === true){
-                    console.log("Button is clicked. Carrying out the task")
-                    activated = false
-                }
-            }
-
-            onActivated: function(){
-                console.log("Button actiaved")
-                activated = true
-            }
-
-            onProgressChanged: function(){
-                console.log(progress)
-            }
-        }
-    }
     Column{
-        width: parent.width
-        spacing: 40
+        spacing: 10
+        anchors.fill: parent
 
+        //RadioButton controls
         Label {
             width: parent.width
             wrapMode: Label.Wrap
             horizontalAlignment: Qt.AlignHCenter
-            text: "A Knob used to let the user choose a value from a range"
-            font.pointSize: 15
+            text: "A GroupBox wrapping around RadioButtons."
         }
 
-        Dial{
+        GroupBox{
+            title: "Choose bonus"
             anchors.horizontalCenter: parent.horizontalCenter
-            from: 1
-            to: 100
-            value: 50
-            //wrap: true // Read the docs to figure out if you really want this for your project!
+            Column{
+                RadioButton{
+                    text: "Coke"
+                    onCheckedChanged: function(){
+                        if(checked){
+                            console.log("Coke button checked")
+                        }else{
+                            console.log("Coke button NOT checked")
+                        }
+                    }
+                }
 
-            onValueChanged: function(){
-                console.log("Current value: " + Math.ceil(value))
+                RadioButton{
+                    text: "Green Tea"
+                }
+
+                RadioButton{
+                    text: "Ice Cream"
+                }
             }
         }
+
+        //Checkbox controls
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "A GroupBox wrapping around CheckBoxes."
+        }
+
+        GroupBox{
+            title: "Choose a Qt supported desktop platoform"
+            anchors.horizontalCenter: parent.horizontalCenter
+            Column{
+                CheckBox{
+                    text: "Windows"
+                    onCheckedChanged: function(){
+                        if(checked){
+                            console.log("Windows button checked")
+                        }else{
+                            console.log("Windows button NOT checked")
+                        }
+                    }
+                }
+
+                CheckBox{
+                    text: "Mac"
+                }
+
+                CheckBox{
+                    text: "Linux"
+                }
+            }
+        }
+
+        // Disable and enable a groupbox
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "A Groupbox that can enabled and disabled"
+        }
+
+        GroupBox{
+            anchors.horizontalCenter: parent.horizontalCenter
+            label: CheckBox{
+                id: checkBox
+                checked: true
+                text: checked ? "Disable" : "Enable" // ternary operator
+                onCheckedChanged: function(){
+                    console.log("Status: " + text + "d")
+                }
+            }
+
+            Column{
+                enabled: checkBox.checked
+                CheckBox{
+                    text: "Item1"
+                }
+                CheckBox{
+                    text: "Item2"
+                }
+                CheckBox{
+                    text: "Item3"
+                }
+            }
+        }
+
     }
 }
