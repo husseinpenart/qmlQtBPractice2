@@ -655,7 +655,183 @@ Item {
                 textAreaId.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan"
             }
         }
+    }
+
+    Column{
+        spacing: 30
+        anchors.centerIn: parent
+
+        Row{
+            spacing: 30
+            width: 300
+            Label{
+                width: 100
+                height: 50
+                wrapMode: Label.Wrap
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: "First name: "
+            }
+
+            Text{
+                id:textValue
+                color:"red"
+                text: textFieldId.text
+            }
+
+            TextField{
+                id: textFieldId
+                width: 200
+                height: 50
+                placeholderText: "Type in your name"
+                onEditingFinished: function(){
+                    console.log("Current text: " + text)
+                }
+            }
+        }
+
+        Button{
+            text: "Click"
+            onClicked: function(){
+                console.log("Text: " + textFieldId.text)
+                textFieldId.text = textValue.text
+            }
+        }
+    }
 
 
+    SplitView{
+        anchors.fill: parent
+        orientation: Qt.Horizontal
+
+        Rectangle{
+            id: rect1Id
+            SplitView.preferredWidth: 100
+            color: "lightblue"
+            Text{
+                text: "View1"
+                anchors.centerIn: parent
+            }
+        }
+        Rectangle{
+            id: rect2Id
+            SplitView.preferredWidth: 100
+            SplitView.minimumWidth: 50
+            color: "lightgray"
+            Text{
+                text: "View2"
+                anchors.centerIn: parent
+            }
+        }
+        Rectangle{
+            id: rect3Id
+            SplitView.preferredWidth: 100
+            color: "lightgreen"
+            Text{
+                text: "View3"
+                anchors.centerIn: parent
+            }
+        }
+    }
+
+    // drawer part which need applicationWindows Tags /
+
+    header: ToolBar{
+        height: 50
+        background: Rectangle{
+            color: "lightgray"
+        }
+
+        RowLayout{
+            spacing: 20
+            anchors.fill: parent
+
+            ToolButton{
+                background: Rectangle{
+                    color: "lightgray"
+                }
+
+                icon.source: "images/drawer.png"
+
+                onClicked: function(){
+                    //Open the drawer
+                    drawerId.open()
+                }
+            }
+
+            Label{
+                id: titleLabelId
+                text: "Drawerr App"
+                font.pointSize: 20
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                Layout.fillWidth: true
+            }
+        }
+    }
+
+    Drawer{
+        id: drawerId
+        width: Math.min(rootId.width, rootId.height) * (2/3)
+        height: rootId.height
+        interactive: true
+
+        ColumnLayout{
+            spacing: 0
+            width: parent.width
+
+            Button{
+                width: parent.width
+                height: 50
+                text: "Item1"
+                font.pointSize: 20
+                background: Rectangle{
+                    color: "dodgerblue"
+                }
+                Layout.fillWidth: true
+                onClicked: function(){
+                    console.log("Clicked on Item1")
+                    contentRectId.color = "red"
+                    drawerId.close()
+                }
+            }
+            Button{
+                width: parent.width
+                height: 50
+                text: "Item2"
+                font.pointSize: 20
+                background: Rectangle{
+                    color: "yellowgreen"
+                }
+                Layout.fillWidth: true
+                onClicked: function(){
+                    console.log("Clicked on Item2")
+                    contentRectId.color = "green"
+                    drawerId.close()
+                }
+            }
+            Button{
+                width: parent.width
+                height: 50
+                text: "Item3"
+                font.pointSize: 20
+                background: Rectangle{
+                    color: "dodgerblue"
+                }
+                Layout.fillWidth: true
+                onClicked: function(){
+                    console.log("Clicked on Item3")
+                    contentRectId.color = "blue"
+                    drawerId.close()
+                }
+            }
+        }
+
+    }
+
+    Rectangle{
+        id: contentRectId
+        anchors.fill: parent
+        color: "gray"
     }
 }

@@ -16,31 +16,45 @@ qt_add_qml_module(appqtQmlPracticeBeginnerp2
     URI qtQmlPracticeBeginnerp2
     VERSION 1.0
     QML_FILES
-        Main.qml
-        QML_FILES LabeledTextInput.qml
-        QML_FILES inputs.qml
-        QML_FILES TextEdit.qml
-        QML_FILES mouseArea.qml
-        QML_FILES KeyPress.qml
-        QML_FILES keyPositions.qml
-        QML_FILES anchorsPositions.qml
-        QML_FILES margins.qml
-        QML_FILES siblings.qml
-        QML_FILES layout.qml
-        QML_FILES flows.qml
-        QML_FILES QtControllers.qml
-        RESOURCES
-           images/image1.jpg
-           images/image2.jpg
-           images/image3.jpg
-        RESOURCE_PREFIX /
+    Main.qml
+    QML_FILES LabeledTextInput.qml
+    QML_FILES inputs.qml
+    QML_FILES TextEdit.qml
+    QML_FILES mouseArea.qml
+    QML_FILES KeyPress.qml
+    QML_FILES keyPositions.qml
+    QML_FILES anchorsPositions.qml
+    QML_FILES margins.qml
+    QML_FILES siblings.qml
+    QML_FILES layout.qml
+    QML_FILES flows.qml
+    QML_FILES QtControllers.qml
+    RESOURCES
+    images/image1.jpg
+    images/image2.jpg
+    images/image3.jpg
+    images/copyIcon.png
+    images/cutIcon.png
+    images/info.png
+    images/newFileIcon.png
+    images/openIcon.png
+    images/pasteIcon.png
+    images/quitIcon.png
+    images/redoIcon.png
+    images/saveAsIcon.png
+    images/saveIcon.png
+    images/undoIcon.png
+    RESOURCE_PREFIX /
+    QML_FILES Page1.qml
+    QML_FILES Page2.qml
+    QML_FILES Page3.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 set_target_properties(appqtQmlPracticeBeginnerp2 PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appqtQmlPracticeBeginnerp2
+    #    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appqtQmlPracticeBeginnerp2
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
