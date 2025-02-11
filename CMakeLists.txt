@@ -48,6 +48,8 @@ qt_add_qml_module(appqtQmlPracticeBeginnerp2
     QML_FILES Page1.qml
     QML_FILES Page2.qml
     QML_FILES Page3.qml
+    QML_FILES Navigation.qml
+    QML_FILES Dialog.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

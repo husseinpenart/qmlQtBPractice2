@@ -2,14 +2,174 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
+Item {
+    Column{
+        spacing: 20
+        anchors.centerIn: parent
 
-ApplicationWindow{
-    id: rootId
-    width: 640
-    height: 480
-    visible: true
-    title: qsTr("qt beginner practice part 2")
+        Button{
+            text: "Choose color"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: function(){
+                colorDialogId.open()
+            }
+        }
 
+
+        Rectangle{
+            id: rectangleId
+            width: 200
+            height: 200
+            border.color: "black"
+            border.width: 8
+            anchors.horizontalCenter: parent.horizontalCenter
+
+        }
+
+        ColorDialog{
+            id: colorDialogId
+            title: "Choose color"
+            onAccepted: function(){
+                console.log("Choosen color: " + selectedColor)
+                rectangleId.color = selectedColor
+            }
+
+            onRejected: function(){
+                console.log("User rejected the dialog")
+            }
+        }
+    }
+
+    Column{
+        spacing: 20
+        anchors.centerIn: parent
+
+        Button{
+            text: "Choose file"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: function(){
+                fileDialogId.open()
+            }
+        }
+
+
+        Text{
+            id: textId
+            text: "User hasn't chosen yet."
+            wrapMode: Text.Wrap
+
+        }
+
+
+        FileDialog{
+            id: fileDialogId
+            title: "Choose file"
+            nameFilters: ["Text files (*.txt)", "HTML files (*.html *.htm)", "Images (*.jpg *.png)"]
+            fileMode: FileDialog.OpenFiles // Allow for selecting multiple files
+            onAccepted: function(){
+                textId.text = currentFile
+            }
+
+            onRejected: function(){
+                console.log("Dialog rejected")
+            }
+
+        }
+    }
+    Column {
+        spacing: 20
+        anchors.centerIn: parent
+
+        Button {
+            text: "Choose Folder"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: function(){
+                folderDialogId.open();
+            }
+        }
+
+        Text {
+            id: textId
+            text: "Use hasn't chosen yet"
+            wrapMode: Text.Wrap
+        }
+
+        FolderDialog {
+            id: folderDialogId
+            title: "Choose Folder"
+            currentFolder: folderDialogId.currentFolder
+            onAccepted: {
+                textId.text = currentFolder;
+            }
+
+            onRejected: {
+                textId.text = "Dialog rejected";
+            }
+        }
+    }
+
+    Column {
+        spacing: 20
+        anchors.centerIn: parent
+
+        Button {
+            text: "Change Font"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                fontDialogId.open();
+            }
+        }
+
+        Text {
+            id: textId2
+            text: "Hello World"
+        }
+
+        FontDialog{
+            id: fontDialogId
+            title: "Choose Font"
+            options: FontDialog.MonospacedFonts
+            currentFont: Qt.font({
+                                     family: "Arial",
+                                     pointSize: 24,
+                                     weight: Font.Normal
+                                 })
+            onAccepted: function(){
+                textId2.font = fontDialogId.selectedFont
+            }
+
+            onRejected: function(){
+                console.log("Dialog is rejected.")
+            }
+
+        }
+
+    }
+
+    Column{
+        spacing: 20
+
+        Button{
+            text: "Press Me"
+            onClicked: function(){
+                messageDialogId.open()
+            }
+        }
+    }
+
+    MessageDialog{
+        id: messageDialogId
+        title: "Message"
+        text: "Lie down and watch the sky my friend!"
+        buttons: MessageDialog.Ok | MessageDialog.Cancel
+        onAccepted: function(){
+            console.log("Dialog accepted")
+        }
+
+        onRejected: function(){
+            console.log("Dialog rejected")
+        }
+    }
 
 
 
