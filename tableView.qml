@@ -4,12 +4,8 @@ import QtQuick.Layouts
 import QtQuick.Dialogs
 import Qt.labs.qmlmodels
 
-ApplicationWindow{
-    id: rootId
-    width: 640
-    height: 480
-    visible: true
-    title: qsTr("qt beginner practice part 2")
+
+Item {
 
     HorizontalHeaderView{
         id: horizontalHeaderViewId
